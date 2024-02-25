@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="navbar-brand color-light ms-5 me-5" href="/">TSU</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link text-uppercase" href="/"><%= __("home") %></a>
+            </li>
+            <li class="nav-item">
+                <a class="btn text-uppercase btn-outline-primary" href="/articles"><%= __("news") %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-uppercase" href="/weather"><%= __("weather") %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-uppercase" href="/favourites"><%= __("favourites") %></a>
+            </li>
+            <% if(!user){%>
+            <li class="nav-item">
+                <a class="nav-link text-uppercase" href="/login"><%= __("signin") %></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-uppercase" href="/signup"><%= __("signup") %></a>
+            </li>
+            <%}else{%>
+                <% if(user.is_admin){%>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="/admin"><%= __("admin panel") %></a>
+                    </li>
+                    <%}%>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="/profile/<%user.username%>"><%= user.username %></a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-danger text-uppercase" id="logout-btn"><%= __("logout") %></button>
+                </li>
+                
+            <% } %>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <%= __("lang") %>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/changeLang/en">En</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="/changeLang/ru">Ru</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="<%= __("search") %>" aria-label="Search">
+            <button class="btn btn-outline-danger" type="submit"><%= __("search") %></button>
+        </form>
+        </form>
+    </div>
+</nav>
+<div class="alert alert-danger" id="exch">
+
+</div>
+
+

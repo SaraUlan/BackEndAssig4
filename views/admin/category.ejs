@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Admin page</title>
+</head>
+
+<body>
+    <header>
+        <%- include ('../components/header.ejs') %>
+    </header>
+
+    <main class="container mt-3">
+        <h3>Welcome to Admin panel</h3>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/admin">
+                                <%= __("admin") %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/articles">
+                                <%= __("articles") %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/categories">
+                                <%= __("categories") %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/comments">
+                                <%= __("comments") %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/users">
+                                <%= __("users") %>
+                            </a>
+                        </li>
+                    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="my-5">
+            <h3><%= __("update")%> - <%= category.name%></h3>
+            <form class="" action="/admin/api/categories/<%= category._id %>/update" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for=""><%= __("Icon")%></label>
+                    <input type="file" class="form-control" name="icon" id="icon">
+                </div>
+                <div class="form-group">
+                    <label for=""><%= __("addcategoryname")%></label>
+                    <input type="text" name="name" class="form-control" id="name"  value="<%= category.name%>">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2"><%= __("update")%></button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <%- include ('../components/footer.ejs') %>
+    </footer>
+
+    <%- include('../components/javascript.ejs') %>
+</body>
+
+</html>

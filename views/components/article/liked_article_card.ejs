@@ -1,0 +1,10 @@
+<div class="single-bottom mb-35">
+    <div class="trend-bottom-img mb-30">
+        <img src="<%= article.cover[0] %>" class="img-fluid w-100" alt="">
+    </div>
+    <div class="trend-bottom-cap">
+        <span class="badge bg-dark"><a class="text-white" href="/articles?category=<%= article.category._id%>"><%= article.category.name %></a></span>
+        <h4><a class="text-dark" href="/articles/<%= article._id %>"><%= article.title %></a></h4>
+    </div>
+    <button class="btn btn-danger btn-unlike" data-article-id="<%= article._id %>"><%= __("unlike") %></button>
+</div>

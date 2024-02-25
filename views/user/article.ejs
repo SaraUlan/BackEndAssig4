@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Index</title>
+
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <header>
+        <%- include ('../components/header.ejs') %>
+    </header>
+
+    <main class="container mt-3">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="about-right mb-90">
+                    <div class="about-img">
+                        <img src="<%= article.cover[0] %>" class="img-fluid w-50" alt="">
+                    </div>
+                    <div class="about-prea my-5">
+                        <%= article.content %>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Comment</label>
+                        <div class="d-flex flex-row">
+                            <input type="text" name="comment" id="comment" class="form-control" required>
+                            <button class="btn btn-dark" id="btn-comment"
+                                data-article-id="<%= article._id%>">Comment</button>
+                        </div>
+                    </div>
+                    <div class="comments my-5" id="comments">
+                        <% article.comments.forEach(comment=> {%>
+                            <div class="comment rounded bg-light p-3 mt-2">
+                                <div class="d-flex flex-row gap-3 justify-content-start align-items-center">
+                                    <img src="https://images.placeholders.dev/?width=200&height=200" width="36"
+                                        height="36" class="rounded-circle" alt="">
+                                    <span><a href="/profiles/">
+                                            <%= comment.user.username %>
+                                        </a></span>
+                                </div>
+                                <div class="">
+                                    <%= comment.comment %>
+                                </div>
+                                <span class="text-secondary">
+                                    <%= comment.createdAt.toLocaleString(); %>
+                                </span>
+                            </div>
+                            <% }); %>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column gap-3 col-md-3">
+                <% articles.forEach(article=> {%>
+                    <%- include('../components/article/article_card.ejs', {article : article});%>
+                        <% }); %>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include ('../components/footer.ejs'); %>
+    </footer>
+    <%- include('../components/javascript.ejs');%>
+        <script type="text/javascript" src="/javascripts/user/comment.js"></script>
+</body>
+
+</html>
