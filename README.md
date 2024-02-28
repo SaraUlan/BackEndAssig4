@@ -20,5 +20,10 @@ Website created using JS and EJS, using bootstrap. For database that contain all
 3. ```npm start``` to run website.It's running in 3000 LocalHost
 4. Past this link on your browser ```http://localhost:3000``` to open the website.
 
+ Admin Panel:
+ Past this link http://localhost:3000/admin or lig in as:
+ username: sara
+ password: 124578as78
+
 
 Deploy: https://backendassig4-5grf.onrender.com/
