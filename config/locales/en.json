@@ -42,5 +42,6 @@
 	"editcomment": "Update comment",
 	"article": "Article",
 	"comment": "Comment",
-	"Home": "Home"
+	"Home": "Home",
+	"greeting": "greeting"
 }

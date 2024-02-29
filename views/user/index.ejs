@@ -42,7 +42,16 @@
             </div>
             <% trendingSide.forEach(article=> { %>
                 <div class="col-lg-4">
-                    <%- include('../components/article/article_card.ejs', {article : article}) %>
+                    <div class="single-bottom mb-35">
+                        <div class="trend-bottom-img mb-30">
+                            <img src="<%= article.cover %>" class="img-fluid w-100" alt="">
+                        </div>
+                        <div class="trend-bottom-cap">
+                            <h4><a class="text-dark" href="<%= article.url %>">
+                                    <%= article.title %>
+                                </a></h4>
+                        </div>
+                    </div>
                 </div>
             <% }); %>
         </div>

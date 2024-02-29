@@ -38,6 +38,23 @@ router.get("/getExchange", async (req, res) => {
   }
 });
 
+router.get('/get-other-news', async (req, res) => {
+  try {
+    const user = req.session.user;
+    const apikey = "5ad4968a0ce0456b8a0731b38db41e83";
+    const response = await fetch(
+      `https://newsapi.org/v2/everything?q=tesla&from=2024-01-29&sortBy=publishedAt&apiKey=${apikey}`
+    );
+
+    const data = await response.json();
+    const strikes = data.articles.slice(0, 6);
+      
+    res.status(200).json(strikes);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/auth/login", isNotLoggedIn, async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);

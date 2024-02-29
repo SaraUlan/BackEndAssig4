@@ -56,6 +56,6 @@ const articleSchema = new mongoose.Schema({
   comments: [commentSchema],
 });
 
-const Article = mongoose.model("articles", articleSchema, "article");
+const Article = mongoose.model("articles", articleSchema, "articles");
 
 module.exports = Article;

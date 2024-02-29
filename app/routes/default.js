@@ -1,6 +1,7 @@
 const express = require("express");
 const { isLoggedIn, isNotLoggedIn } = require("../middleware/auth");
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const Article = require("../models/Article");
 const Category = require("../models/Category");
@@ -16,10 +17,22 @@ router.get("/", async (req, res) => {
 
   const firstArticle = articles[0];
   const trendingBottom = articles.slice(1, 4);
-  const trendingSide = articles.slice(4, 8);
   const whatsNew = articles.slice(8, 12);
   const recentArticles = articles.slice(12, 16);
 
+  const apikey = "5ad4968a0ce0456b8a0731b38db41e83";
+  const response = await fetch(
+    `https://newsapi.org/v2/everything?q=tesla&from=2024-01-29&sortBy=publishedAt&apiKey=${apikey}`
+  );
+  const trendingjson = await response.json();
+  const trendingSide = [];
+  trendingjson.articles.slice(1, 6).forEach((article) => {
+    trendingSide.push({
+      url: article.url,
+      title: article.title,
+      cover: article.urlToImage,
+    });
+  });
   const locals = {
     user: user,
     articles: articles,
@@ -86,7 +99,6 @@ router.get("/articles", isLoggedIn, async (req, res) => {
   }
 });
 
-
 router.get("/articles/:new", isLoggedIn, async (req, res) => {
   try {
     const user = req.session.user;
@@ -96,12 +108,12 @@ router.get("/articles/:new", isLoggedIn, async (req, res) => {
       .populate({
         path: "comments",
         populate: {
-          path: 'user',
-          model : 'users'
+          path: "user",
+          model: "users",
         },
       })
       .populate("author");
-    
+
     article.comments.sort((a, b) => b.createdAt - a.createdAt);
     console.log(article);
     const articles = await Article.find({}).limit(5);

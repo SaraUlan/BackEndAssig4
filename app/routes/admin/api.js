@@ -167,7 +167,7 @@ router.post(
       if (iconFile) {
         data.icon = iconFile;
       }
-
+      console.log(data);
       const category = new Category({ ...data });
       await category.save();
 
